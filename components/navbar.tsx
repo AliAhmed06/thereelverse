@@ -87,10 +87,12 @@ export function Navbar() {
         <div className="fixed inset-0 bg-background z-50 flex flex-col">
           <div className="container flex h-20 items-center justify-between">
             <div className="flex items-center gap-2 font-bold text-xl">
-              <div className="rounded-full bg-primary/10 p-2">
-                <Film className="h-6 w-6 text-primary" />
-              </div>
-              <span>The Reelverse Studios</span>
+              <Image
+                src={"/images/logo.png"}
+                height={100}
+                width={100}
+                alt="TheReelVerse Logo"
+              />
             </div>
             <Button
               variant="ghost"
