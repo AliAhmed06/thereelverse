@@ -1,30 +1,31 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/mode-toggle"
-import { Film, Menu, X } from "lucide-react"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Film, Menu, X } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const pathname = usePathname()
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { href: "#what-we-do", label: "What We Do" },
@@ -32,26 +33,34 @@ export function Navbar() {
     { href: "#why-choose-us", label: "Why Choose Us" },
     { href: "#portfolio", label: "Portfolio" },
     { href: "#contact", label: "Contact" },
-  ]
+  ];
 
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm border-b" : "bg-transparent",
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md shadow-sm border-b"
+          : "bg-transparent"
       )}
     >
       <div className="container flex h-20 items-center justify-between">
         <div className="flex items-center gap-2 font-bold text-xl">
-          <div className="rounded-full bg-primary/10 p-2">
-            <Film className="h-6 w-6 text-primary" />
-          </div>
-          <span>The Reelverse Studios</span>
+          <Image
+            src={"/images/logo.png"}
+            height={100}
+            width={100}
+            alt="TheReelVerse Logo"
+          />
         </div>
 
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               {link.label}
             </Link>
           ))}
@@ -62,7 +71,12 @@ export function Navbar() {
           <Button asChild className="hidden md:flex rounded-full px-6">
             <Link href="#contact">Get Started</Link>
           </Button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(true)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
             <Menu className="h-6 w-6" />
           </Button>
         </div>
@@ -78,7 +92,11 @@ export function Navbar() {
               </div>
               <span>The Reelverse Studios</span>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <X className="h-6 w-6" />
             </Button>
           </div>
@@ -102,5 +120,5 @@ export function Navbar() {
         </div>
       )}
     </header>
-  )
+  );
 }
